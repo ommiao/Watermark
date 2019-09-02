@@ -12,14 +12,20 @@ import cn.ommiao.flyme8watermark.R;
 
 public class Flyme8Watermark extends View {
 
-    private static final String WATERMARK = "Flyme 内测版";
+    public static final String FIELD_TEXT_WATERMARK = "text_watermark";
 
-    private int fontSize, screenWidth, screenHeight, spaceH, spaceV, marginLeft;
+    private static String WATERMARK;
+
+    private int fontSize;
+    private int screenWidth;
+    private int screenHeight;
+    private int marginLeft;
 
     private Paint mPaint = new Paint();
     private float widthPerDraw;
 
     private int lines, timesPerLine;
+    private int spaceH;
 
     public Flyme8Watermark(Context context) {
         this(context, null);
@@ -39,12 +45,12 @@ public class Flyme8Watermark extends View {
     }
 
     private void init() {
+        WATERMARK = getContext().getSharedPreferences("data", Context.MODE_PRIVATE).getString(FIELD_TEXT_WATERMARK, getResources().getString(R.string.default_watermark));
         fontSize = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_SP, 14, getResources().getDisplayMetrics());
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         spaceH = getResources().getDimensionPixelOffset(R.dimen.spaceH);
-        spaceV = getResources().getDimensionPixelOffset(R.dimen.spaceV);
         marginLeft = getResources().getDimensionPixelOffset(R.dimen.marginLeft);
         mPaint.setAntiAlias(true);
         mPaint.setColor(getResources().getColor(R.color.colorWatermark));
@@ -59,7 +65,7 @@ public class Flyme8Watermark extends View {
         super.onDraw(canvas);
         canvas.rotate(-30);
         canvas.translate((float) -(Math.sqrt(3) / 8 * widthPerDraw) + marginLeft, 0);
-        for(int i = 0; i < getLines(); i++){
+        for(int i = 0; i < lines; i++){
             for(int j = 0; j < timesPerLine; j++){
                 canvas.drawText(WATERMARK, - (float) 1 / 4 * widthPerDraw * i + widthPerDraw * j, (float) (Math.sqrt(3) / 4 * widthPerDraw * (i + 1)), mPaint);
             }
@@ -75,7 +81,7 @@ public class Flyme8Watermark extends View {
                 timesPerLine++;
             }
         }
-        timesPerLine++;
+        timesPerLine += 3;
         return timesPerLine;
     }
 
@@ -88,7 +94,7 @@ public class Flyme8Watermark extends View {
                 lines++;
             }
         }
-        lines++;
+        lines += 3;
         return lines;
     }
 
@@ -96,5 +102,13 @@ public class Flyme8Watermark extends View {
         TextPaint paint = new TextPaint();
         paint.setTextSize(fontSize);
         return paint.measureText(text);
+    }
+
+    public void refresh(){
+        WATERMARK = getContext().getSharedPreferences("data", Context.MODE_PRIVATE).getString(FIELD_TEXT_WATERMARK, getResources().getString(R.string.default_watermark));
+        widthPerDraw = getTextWidth(WATERMARK) + spaceH;
+        lines = getLines();
+        timesPerLine = getTimesPerLine();
+        invalidate();
     }
 }
