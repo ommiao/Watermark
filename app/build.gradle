@@ -20,6 +20,13 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (outputFileName.endsWith('.apk')) {
+                outputFileName = "Flyme8Watermark_${versionName}.apk"
+            }
+        }
+    }
 }
 
 dependencies {

@@ -17,8 +17,7 @@ public class Flyme8Watermark extends View {
     private static String WATERMARK;
 
     private int fontSize;
-    private int screenWidth;
-    private int screenHeight;
+    private int maxWidth;
     private int marginLeft;
 
     private Paint mPaint = new Paint();
@@ -48,8 +47,9 @@ public class Flyme8Watermark extends View {
         WATERMARK = getContext().getSharedPreferences("data", Context.MODE_PRIVATE).getString(FIELD_TEXT_WATERMARK, getResources().getString(R.string.default_watermark));
         fontSize = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_SP, 14, getResources().getDisplayMetrics());
-        screenWidth = getResources().getDisplayMetrics().widthPixels;
-        screenHeight = getResources().getDisplayMetrics().heightPixels;
+        int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        int screenHeight = getResources().getDisplayMetrics().heightPixels;
+        maxWidth = screenWidth > screenHeight ? screenWidth : screenHeight;
         spaceH = getResources().getDimensionPixelOffset(R.dimen.spaceH);
         marginLeft = getResources().getDimensionPixelOffset(R.dimen.marginLeft);
         mPaint.setAntiAlias(true);
@@ -75,7 +75,7 @@ public class Flyme8Watermark extends View {
     private int getTimesPerLine(){
         int timesPerLine = 1;
         for (;;){
-            if(widthPerDraw * timesPerLine > screenWidth){
+            if(widthPerDraw * timesPerLine > maxWidth){
                 break;
             } else {
                 timesPerLine++;
@@ -88,7 +88,7 @@ public class Flyme8Watermark extends View {
     private int getLines(){
         int lines = 1;
         for(;;){
-            if((float) (Math.sqrt(3) / 4 * widthPerDraw * lines) > screenHeight){
+            if((float) (Math.sqrt(3) / 4 * widthPerDraw * lines) > maxWidth){
                 break;
             } else {
                 lines++;
