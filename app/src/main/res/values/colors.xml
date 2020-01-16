@@ -2,4 +2,5 @@
 <resources>
     <color name="colorPrimary">#666666</color>
     <color name="colorWatermark">#66666666</color>
+    <color name="halfWhite">#99FFFFFF</color>
 </resources>

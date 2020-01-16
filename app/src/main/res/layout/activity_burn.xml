@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <View
+        android:id="@+id/center"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true" />
+
+    <cn.ommiao.flyme8watermark.widget.LongPressImageView
+        android:id="@+id/iv_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/center"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_rect_up" />
+
+    <cn.ommiao.flyme8watermark.widget.LongPressImageView
+        android:id="@+id/iv_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/center"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_rect_down" />
+
+    <cn.ommiao.flyme8watermark.widget.LongPressImageView
+        android:id="@+id/iv_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/center"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_rect_left" />
+
+    <cn.ommiao.flyme8watermark.widget.LongPressImageView
+        android:id="@+id/iv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/center"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_rect_right" />
+
+    <ImageView
+        android:id="@+id/iv_swicher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_switch"
+        android:tint="#000000" />
+
+    <SeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_down"
+        android:progressDrawable="@drawable/seekbar"
+        android:thumb="@null"
+        android:max="100"
+        android:progress="50"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@null"
+        android:splitTrack="false"/>
+
+
+</RelativeLayout>

@@ -1,6 +1,5 @@
-package cn.ommiao.flyme8watermark;
+package cn.ommiao.flyme8watermark.manager;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.view.Gravity;
@@ -8,38 +7,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
-import cn.ommiao.flyme8watermark.widget.Flyme8Watermark;
+import cn.ommiao.flyme8watermark.R;
 
-public class WatermarkManager {
-
-    private static final float animateOffset = 145;
+public abstract class BaseCoverManager {
 
     private WindowManager mWindowManager;
-    private static WatermarkManager mInstance;
-    private Context mContext;
-
-    private boolean isShow = false;
 
     private View floatView;
-    private Flyme8Watermark watermark;
 
     private WindowManager.LayoutParams params;
 
-    public static WatermarkManager getInstance(Context context, boolean forceCreate) {
-        if(mInstance == null || forceCreate){
-            mInstance = new WatermarkManager(context);
-        }
-        return mInstance;
-    }
+    private boolean show = false;
 
-    @SuppressLint("InflateParams")
-    public WatermarkManager(Context context) {
-        mContext = context;
-        mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        floatView = LayoutInflater.from(mContext).inflate(R.layout.layout_watermark, null);
-        watermark = floatView.findViewById(R.id.watermark);
+    public BaseCoverManager(Context context){
+        mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        floatView = LayoutInflater.from(context).inflate(getLayoutId(), null);
         initWindowParams();
     }
+
+    protected abstract int getLayoutId();
 
     private void initWindowParams() {
         params = new WindowManager.LayoutParams();
@@ -59,10 +45,14 @@ public class WatermarkManager {
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
     }
 
+    public View getFloatView() {
+        return floatView;
+    }
+
     public void show() {
         try {
             mWindowManager.addView(floatView, params);
-            isShow = true;
+            show = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,18 +61,22 @@ public class WatermarkManager {
     public void hide() {
         try {
             mWindowManager.removeView(floatView);
-            isShow = false;
+            show = false;
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public boolean isShow(){
-        return isShow;
+    public boolean switchState(){
+        if(show){
+            hide();
+        } else {
+            show();
+        }
+        return show;
     }
 
-    public void refresh(){
-        watermark.refresh();
+    public boolean isShow() {
+        return show;
     }
-
 }

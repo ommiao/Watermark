@@ -4,45 +4,37 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
+    <View
+        android:id="@+id/v_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/shape_round_corners"
-        android:gravity="center_vertical">
+        android:gravity="center_horizontal">
 
-        <EditText
-            android:id="@+id/et_watermark"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:layout_margin="5dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:text="@string/default_watermark"
-            android:textSize="16sp"
-            android:textColor="@color/colorPrimary"
-            android:background="@null"
-            style="@null"
-            android:hint="@string/default_watermark"
-            android:textColorHint="@color/colorPrimary"
-            android:maxLines="1"
-            android:maxLength="15"
-            android:cursorVisible="true" />
+        <TextView
+            android:id="@+id/tv_mode_watermark"
+            android:layout_width="@dimen/size_main_menu"
+            android:layout_height="@dimen/size_main_menu"
+            android:text="@string/btn_mode_watermark"
+            android:gravity="center"
+            android:background="@drawable/ripple"
+            android:elevation="5dp"
+            android:layout_margin="20dp"/>
 
-        <ImageView
-            android:id="@+id/iv_enter"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_enter"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+        <TextView
+            android:id="@+id/tv_mode_burn"
+            android:layout_width="@dimen/size_main_menu"
+            android:layout_height="@dimen/size_main_menu"
+            android:text="@string/btn_mode_burn"
+            android:gravity="center"
+            android:background="@drawable/ripple"
+            android:elevation="5dp"
+            android:layout_margin="20dp"/>
 
     </LinearLayout>
 
