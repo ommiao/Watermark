@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">全局水印</string>
+    <string name="app_name">水印&amp;烧屏</string>
     <string name="default_watermark">Flyme 内测版</string>
     <string name="tips_blank_text">请输入水印文字</string>
     <string name="tips_open_service">打开无障碍服务即可开启全局水印</string>
