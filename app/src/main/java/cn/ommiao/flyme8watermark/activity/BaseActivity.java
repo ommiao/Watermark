@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import cn.ommiao.flyme8watermark.R;
 import cn.ommiao.flyme8watermark.WatermarkService;
+import cn.ommiao.flyme8watermark.util.ToastUtil;
 import cn.ommiao.flyme8watermark.util.UiUtil;
 
 public abstract class BaseActivity extends Activity {
@@ -98,6 +99,7 @@ public abstract class BaseActivity extends Activity {
     }
 
     public boolean isServiceOn() {
+        boolean on = false;
         int accessibilityEnabled = 0;
         final String service = getPackageName() + "/" + WatermarkService.class.getCanonicalName();
         try {
@@ -118,11 +120,15 @@ public abstract class BaseActivity extends Activity {
                 while (mStringColonSplitter.hasNext()) {
                     String accessibilityService = mStringColonSplitter.next();
                     if (accessibilityService.equalsIgnoreCase(service)) {
-                        return true;
+                        on = true;
                     }
                 }
             }
         }
-        return false;
+        if(!on){
+            ToastUtil.shortToast(this, getString(R.string.tips_open_accessibility_server));
+            openAccessibilityPage();
+        }
+        return on;
     }
 }

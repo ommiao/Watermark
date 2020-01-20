@@ -21,7 +21,10 @@
         </activity>
         <activity android:name=".activity.WatermarkActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.BurnActivity" />
+        <activity android:name=".activity.BurnActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.CornerActivity"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".WatermarkService"

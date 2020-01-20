@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.view.accessibility.AccessibilityEvent;
 
 import cn.ommiao.flyme8watermark.manager.BurnManager;
+import cn.ommiao.flyme8watermark.manager.CornerManager;
 import cn.ommiao.flyme8watermark.manager.WatermarkManager;
 
 public class WatermarkService extends AccessibilityService {
@@ -15,10 +16,14 @@ public class WatermarkService extends AccessibilityService {
     @SuppressLint("StaticFieldLeak")
     private static BurnManager burnManager;
 
+    @SuppressLint("StaticFieldLeak")
+    private static CornerManager cornerManager;
+
     @Override
     protected void onServiceConnected() {
         watermarkManager = new WatermarkManager(this);
         burnManager = new BurnManager(this);
+        cornerManager = new CornerManager(this);
     }
 
     @Override
@@ -39,4 +44,7 @@ public class WatermarkService extends AccessibilityService {
         return burnManager;
     }
 
+    public static CornerManager getCornerManager() {
+        return cornerManager;
+    }
 }

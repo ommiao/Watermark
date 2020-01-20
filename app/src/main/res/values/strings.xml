@@ -7,4 +7,5 @@
     <string name="btn_mode_watermark">水印模式</string>
     <string name="btn_mode_burn">烧屏模式</string>
     <string name="tips_open_accessibility_server">请打开无障碍服务后操作</string>
+    <string name="btn_mode_corner">圆角模式</string>
 </resources>

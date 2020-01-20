@@ -7,8 +7,8 @@ android {
         applicationId "cn.ommiao.flyme8watermark"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
     }
     buildTypes {
         release {
